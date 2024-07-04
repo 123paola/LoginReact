@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -17,14 +17,31 @@ function App() {
   function cambiarClave(evento) {
     setClave(evento.target.value);
   }
-  function ingresar() {
-    if (usuario == "admin" && clave == "admin") {
-      alert("Ingresaste");
-      setLogueado(true);
-    } else {
-      alert("usuario o clave incorrectos");
+  async function ingresar() {
+    const peticion = await fetch('http://localhost:3000/login?usuario='+usuario+'&clave='+clave,{credentials:'include'})
+    if(peticion.ok){
+      setLogueado(true)
+    }else{
+      alert('usuario o clave incorrectos')
     }
+   // if (usuario == "admin" && clave == "admin") {
+    //  alert("Ingresaste");
+    //  setLogueado(true);
+    //} else {
+    //  alert("usuario o clave incorrectos");
+    //}
   }
+
+  async function validar(){
+    const peticion = await fetch('http://localhost:3000/validar',{credentials:'include'})
+    if(peticion.ok){
+      setLogueado(true)
+    }
+    }
+  
+   useEffect(()=>{
+    validar()
+   },[])
   if (logueado) {
     return <Conversor />;
   }
