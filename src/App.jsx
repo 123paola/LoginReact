@@ -25,7 +25,7 @@ function App() {
   }
 
   async function ingresar() {
-    const peticion = await fetch('http://localhost:3000/login?usuario=' + usuario + '&clave=' + clave, 
+    const peticion = await fetch('https://loginexpress-production-2b86.up.railway.app/login?usuario=' + usuario + '&clave=' + clave, 
       { credentials: 'include' })
     if (peticion.ok) {
       setLogueado(true)    
@@ -35,7 +35,7 @@ function App() {
   }
 
  async function validar() {
-    const peticion = await fetch('http://localhost:3000/validar', {credentials: 'include'})
+    const peticion = await fetch('https://loginexpress-production-2b86.up.railway.app/validar', {credentials: 'include'})
     if (peticion.ok) {
       setLogueado(true)
      
